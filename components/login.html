@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWANIMS</title>
-    <link rel="icon" href="img/SWAN-logo.png">
+    <link rel="icon" href="../img/SWAN-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -16,51 +16,61 @@
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="index.html">
-                <img class="bg-none h-16 w-72" src="img/logo.png">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../index.html">
+                <img class="bg-none h-16 w-72" src="../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
             </nav>
-            <button class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0" onclick="window.location.href='components/login.html'">
+            <button
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                onclick="window.location.href='#'">
                 Login
             </button>
-            <button class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mt-4 mx-2 md:mt-0" onclick="window.location.href='components/adminLogin.html'">
+            <button
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mt-4 mx-2 md:mt-0"
+                onclick="window.location.href='#'">
                 Admin Login
             </button>
         </div>
     </header>
-    <section class="text-gray-600 body-font">
-        <div class="container mx-auto flex px-12 md:flex-row flex-col items-center">
-            <div
-                class="lg:w-1/2 md:w-1/2 lg:pr-6 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                <a class="flex title-font font-medium items-center text-gray-900 md:mb-0">
-                    <img class="bg-none mx-auto" src="img/logo.png">
-                </a>
-                <h1 class="title-font sm:text-3xl text-xl mb-4 font-medium text-gray-900">
-                </h1>
-                <div class="flex justify-center">
-                    <button
-                        class="inline-flex text-white font-semibold border-4 border-blue-900 bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-900 rounded text-lg"
-                        onclick="window.location.href='components/reg.html'">STUDENT REGISTRATION
-                    </button>
-                    <button
-                        class="ml-4 inline-flex text-white font-semibold border-4 border-blue-900 bg-blue-700 border-0 py-2 px-6 focus:outline-none hover:bg-blue-900 rounded text-lg"
-                        onclick="window.location.href='components/login.html'">STUDENT LOGIN
-                    </button>
+
+    <section class="text-gray-600 body-font relative">
+        <div class="container px-5 mx-auto flex sm:flex-nowrap md:flex-nowrap flex-wrap">
+            <div class="lg:max-w-lg lg:w-full md:w-1/2 m-auto px-4">
+                <img class="object-cover object-center rounded mx-1" alt="hero" src="../img/login.png">
+            </div>
+            <form class="lg:w-1/2 md:w-1/2 bg-gray-100 border-2 border-blue-500 rounded-lg p-12 my-12 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
+                action="../php-src/_sign-in.php" method="post">
+                <h2 class="text-gray-900 text-2xl mb-3 font-bold title-font text-center">Login</h2>
+                <div class="relative mb-4">
+                    <div class="relative">
+                        <label for="email" class="leading-7 text-lg text-gray-600 font-bold">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
                 </div>
-            </div>
-            <div class="lg:max-w-lg lg:w-full md:w-1/2 flex flex-row ">
-                <img class="object-cover object-center rounded mx-1" alt="hero" src="img/front.png">
-            </div>
+                <div class="relative mb-4">
+                    <div class="relative">
+                        <label for="name" class="leading-7 text-lg text-gray-600 font-bold">Password</label>
+                        <input type="password" id="pwd" name="pwd"
+                            class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                </div>
+                <button
+                    class="flex mx-auto text-white bg-blue-600 border-2 border-green-900 py-2 px-8 my-8 focus:outline-none hover:bg-green-600 rounded text-xl font-bold">
+                    Sign In
+                </button>
+            </form>
         </div>
     </section>
 
     <footer class="text-gray-600 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="https://cse.iitkgp.ac.in/~smisra/swan/people.html" target="_blank">
-                <img class="bg-none h-10 w-10" src="img/SWAN-logo.png">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0"
+                href="https://cse.iitkgp.ac.in/~smisra/swan/people.html" target="_blank">
+                <img class="bg-none h-10 w-10" src="../img/SWAN-logo.png">
             </a>
             <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">©
                 2024 SWANIMS —
@@ -104,4 +114,5 @@
     </footer>
 
 </body>
+
 </html>
