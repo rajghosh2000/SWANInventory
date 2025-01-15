@@ -24,13 +24,8 @@
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
             </nav>
             <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='#'">
-                Take New Item
-            </button>
-            <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='#'">
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-8 md:mt-0"
+                onclick="window.location.href='admin/projectList.php'">
                 Admin Panel
             </button>
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 mx-2" href="#">
@@ -42,7 +37,78 @@
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 mx-auto">
             <div class="flex flex-wrap -m-4">
-                <div class="p-4 w-full">
+                <div class="p-4 w-1/2">
+                    <div class="p-6 rounded-lg border-2 border-blue-500 flex flex-col relative">
+                        <span class="bg-blue-500 text-white font-bold px-3 py-1 tracking-widest text-sm absolute left-0 top-0 rounded-br">
+                            Items List to be Granted
+                        </span>
+                        <div class="w-full mx-auto overflow-auto my-4 h-96">
+                            <table class="table-auto w-full text-left whitespace-no-wrap">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Sno</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Item Taken</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Quantity</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Date Taken on</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Verified By</th>
+                                        <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="px-4 py-3">Start</td>
+                                        <td class="px-4 py-3">5 Mb/s</td>
+                                        <td class="px-4 py-3">15 GB</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="w-60 text-center">
+                                            <button
+                                                class="inline-flex items-center bg-red-400 border-0 py-1 px-12 focus:outline-none hover:bg-red-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                                                onclick="window.location.href='#'">
+                                                Return Items
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">Start</td>
+                                        <td class="px-4 py-3">5 Mb/s</td>
+                                        <td class="px-4 py-3">15 GB</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="w-60 text-center">
+                                            <button
+                                                class="inline-flex items-center bg-yellow-400 border-0 py-1 px-8 focus:outline-none hover:bg-yellow-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                                                disabled>
+                                                Under Verification
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">Start</td>
+                                        <td class="px-4 py-3">5 Mb/s</td>
+                                        <td class="px-4 py-3">15 GB</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="w-60 text-center">
+                                            <button
+                                                class="inline-flex items-center bg-green-600 border-0 py-1 px-10 focus:outline-none hover:bg-green-800 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                                                disabled>
+                                                Items Returned
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button
+                            class="inline-flex items-center bg-blue-600 border-0 py-1 px-4 focus:outline-none hover:bg-green-800 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0 w-1/4"
+                            onclick="window.location.href='#'">
+                            Go Full Page
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 w-1/2">
                     <div class="p-6 rounded-lg border-2 border-blue-500 flex flex-col relative">
                         <span class="bg-blue-500 text-white font-bold px-3 py-1 tracking-widest text-sm absolute left-0 top-0 rounded-br">
                             Items Taken List
@@ -105,20 +171,25 @@
                                 </tbody>
                             </table>
                         </div>
+                        <button
+                            class="inline-flex items-center bg-blue-600 border-0 py-1 px-4 focus:outline-none hover:bg-green-800 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0 w-1/4"
+                            onclick="window.location.href='#'">
+                            Go Full Page
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="mx-auto flex flex-wrap flex-col p-2 md:flex-row">
                 <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
+                <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800" onclick="window.location.href='admin/projectList.php'">Admin Panel
+                    <i class="fa-solid fa-user-pen text-xl text-white ml-auto px-2"></i>
+                </button>
                 <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800">Take New Item
                     <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
                 </button>
                 <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800">History of Items Taken
                     <i class="fa-solid fa-clock-rotate-left text-2xl text-white ml-auto px-2"></i>
-                </button>
-                <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800">Admin Panel
-                    <i class="fa-solid fa-user-pen text-xl text-white ml-auto px-2"></i>
                 </button>
             </div>
         </div>
