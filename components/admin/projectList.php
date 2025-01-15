@@ -31,7 +31,7 @@
             </button>
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='#'">
+                onclick="window.location.href='addNewAdmin.php'">
                 Add New Admin
             </button>
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 mx-2" href="#">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="p-4 md:w-1/4">
+                <a class="p-4 md:w-1/4" href="#">
                     <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
                         <div class="flex items-center mb-3">
                             <img src="../../img/icons-project/wed-dev.png" alt="Distributed Component" class="w-12 h-12">
@@ -118,7 +118,16 @@
                             <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
                         </div>
                     </div>
-                </div>
+                </a>
+            </div>
+            <div class="mx-auto flex flex-wrap flex-col p-2 md:flex-row">
+                <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800">Add New Project
+                    <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
+                </button>
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800">Add New Admin
+                    <i class="fa-solid fa-user-tie text-xl text-white ml-auto px-2"></i>
+                </button>
             </div>
         </div>
     </section>

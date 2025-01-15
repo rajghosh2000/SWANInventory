@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWANIMS</title>
-    <link rel="icon" href="../img/SWAN-logo.png">
+    <link rel="icon" href="../../img/SWAN-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -16,8 +16,8 @@
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../index.html">
-                <img class="bg-none h-16 w-72" src="../img/logo.png">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../../index.html">
+                <img class="bg-none h-16 w-72" src="../../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
@@ -39,35 +39,38 @@
     <section class="text-gray-600 body-font relative">
         <div class="container px-5 mx-auto flex sm:flex-nowrap md:flex-nowrap flex-wrap">
             <div class="lg:max-w-lg lg:w-full md:w-1/2 m-auto px-4">
-                <img class="object-cover object-center rounded mx-1" alt="hero" src="../img/reg.png">
+                <img class="object-cover object-center rounded mx-1" alt="hero" src="../../img/admin-reg.png">
             </div>
             <form
                 class="lg:w-3/5 md:w-1/2 bg-gray-200 border-2 border-blue-500 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 px-4 rounded-lg"
-                action="../php-src/_reg.php" method="post">
-                <h2 class="text-gray-900 text-2xl mb-3 font-bold title-font text-center">REGISTER NOW</h2>
+                action="../../_api/_createAdmin.php" method="post">
+                <h2 class="text-gray-900 text-2xl mb-3 font-bold title-font text-center">ADD NEW ADMIN</h2>
                 <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
-                    <div class="p-2 lg:w-2/5">
+                    <div class="p-2 lg:w-1/2">
                         <div class="relative">
-                            <label for="name" class="leading-7 text-lg text-gray-600 font-bold">Name</label>
-                            <input type="text" id="name" name="name"
+                            <label for="aname" class="leading-7 text-lg text-gray-600 font-bold">Admin Name</label>
+                            <input type="text" id="aname" name="aname"
                                 class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 required>
                         </div>
                     </div>
-                    <div class="p-2 lg:w-2/5">
+                    <div class="p-2 lg:w-1/2">
                         <div class="relative">
-                            <label for="uemail" class="leading-7 text-lg text-gray-600 font-bold">Email</label>
-                            <input type="email" id="uemail" name="uemail"
+                            <label for="aemail" class="leading-7 text-lg text-gray-600 font-bold">Admin Email</label>
+                            <input type="email" id="aemail" name="aemail"
                                 class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                 required>
                         </div>
                     </div>
-                    <div class="p-2 lg:w-1/5">
+                </div>
+
+                <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                    <div class="p-2 lg:w-1/2">
                         <div class="relative">
-                            <label for="gender" class="leading-7 text-lg text-gray-600 font-bold">Gender</label>
+                            <label for="agender" class="leading-7 text-lg text-gray-600 font-bold">Admin Gender</label>
                             <select
                                 class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 font-semibold py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                id="gender" name="gender" required>
+                                id="agender" name="agender" required>
                                 <option value=" ">--select gender--</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
@@ -75,42 +78,11 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
                     <div class="p-2 lg:w-1/2">
                         <div class="relative">
-                            <label for="roll" class="leading-7 text-lg text-gray-600 font-bold">Institute Roll
-                                Number</label>
-                            <input type="text" id="roll" name="roll"
-                                class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                required>
-                        </div>
-                    </div>
-                    <div class="p-2 lg:w-1/2">
-                        <div class="relative">
-                            <label for="mname" class="leading-7 text-lg text-gray-600 font-bold">Assigned Mentor
-                                Name</label>
-                            <input type="text" id="mname" name="mname"
-                                class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                required>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
-                    <div class="p-2 lg:w-1/2">
-                        <div class="relative">
-                            <label for="upwd" class="leading-7 text-lg text-gray-600 font-bold">Password</label>
-                            <input type="password" id="upwd" name="upwd"
-                                class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                required oninput="checkPasswordMatch()">
-                        </div>
-                    </div>
-                    <div class="p-2 lg:w-1/2">
-                        <div class="relative">
-                            <label for="cpwd" class="leading-7 text-lg text-gray-600 font-bold">Confirm Password</label>
-                            <input type="password" id="cpwd" name="cpwd"
-                                class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                required oninput="checkPasswordMatch()">
+                            <label for="apwd" class="leading-7 text-lg text-gray-600 font-bold">Admin Temporary Password</label>
+                            <input type="password" id="apwd" name="apwd"
+                                class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
                         </div>
                     </div>
                     <div class="p-1 w-full text-center">
@@ -119,9 +91,8 @@
                 </div>
                 <div class="p-2 w-full">
                     <button
-                        class="flex mx-auto text-white bg-blue-600 border-2 border-blue-900 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-xl font-bold"
-                        id="reg-sub" name="reg-sub" disabled>
-                        Register
+                        class="flex mx-auto text-white bg-blue-600 border-2 border-blue-900 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-xl font-bold mt-12">
+                        Add Admin
                     </button>
                 </div>
             </form>
@@ -132,7 +103,7 @@
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0"
                 href="https://cse.iitkgp.ac.in/~smisra/swan/people.html" target="_blank">
-                <img class="bg-none h-10 w-10" src="../img/SWAN-logo.png">
+                <img class="bg-none h-10 w-10" src="../../img/SWAN-logo.png">
             </a>
             <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">©
                 2024 SWANIMS —
