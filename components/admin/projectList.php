@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['signedIn'])) {
+    header("Location: ../index.html");
+    exit();
+}
+include '../../_api/_db.php';
+$uname = $_SESSION['uname'];
+$aID = $_SESSION['aID'];
+
+$chk_sql = "SELECT * FROM `admin` WHERE a_id ='$aID';";
+$res_chk = mysqli_query($con, $chk_sql);
+$row = mysqli_fetch_assoc($res_chk);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +32,7 @@
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../../index.html">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../main.php">
                 <img class="bg-none h-16 w-72" src="../../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
@@ -34,9 +49,44 @@
                 onclick="window.location.href='addNewAdmin.php'">
                 Add New Admin
             </button>
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 mx-2" href="#">
-                <img class="bg-none h-16 w-16" src="../../img/female.png">
-            </a>
+
+            <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
+
+                <?php
+                if (!isset($_SESSION['signedIn'])) {
+                    echo 'Hi, ' . $uname;
+                } else {
+                    echo 'Admin, ' . $uname;
+                }
+                ?>
+
+            </p>
+
+            <div class="relative">
+                <button id="dropdownButton" class="flex items-center focus:outline-none">
+                    <?php
+                    if (strcmp($row['a_gender'], 'M') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/male.png" alt="User Avatar">';
+                    } elseif (strcmp($row['a_gender'], 'F') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/female.png" alt="User Avatar">';
+                    } else {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/gender_none.png" alt="User Avatar">';
+                    }
+                    ?>
+                </button>
+
+                <div id="dropdownMenu" class="hidden absolute right-0 bg-white border-2 border-green-700 shadow-lg rounded-md w-32 mt-2">
+                    <ul class="text-black font-bold">
+                        <li>
+                            <a href="#" class="block px-4 py-1 hover:bg-green-500">Profile</a>
+                        </li>
+                        <hr class="border-t-2 border-green-800">
+                        <li>
+                            <a href="../../_api/_logout.php" class="block px-4 py-1 hover:bg-green-500">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -125,7 +175,7 @@
                 <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800">Add New Project
                     <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
                 </button>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800">Add New Admin
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewAdmin.php'">Add New Admin
                     <i class="fa-solid fa-user-tie text-xl text-white ml-auto px-2"></i>
                 </button>
             </div>
@@ -178,7 +228,26 @@
             </span>
         </div>
     </footer>
+    <script>
+        // JavaScript to toggle dropdown visibility
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
 
+        dropdownButton.addEventListener('click', () => {
+            if (dropdownMenu.classList.contains('hidden')) {
+                dropdownMenu.classList.remove('hidden');
+            } else {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>

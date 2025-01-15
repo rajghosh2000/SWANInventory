@@ -23,15 +23,11 @@
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
             </nav>
-            <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='login.html'">
-                Login
+            <button class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0" onclick="window.location.href='components/login.html'" disabled>
+                Student Login
             </button>
-            <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mt-4 mx-2 md:mt-0"
-                onclick="window.location.href='reg.html'">
-                User Registration
+            <button class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mt-4 mx-2 md:mt-0" onclick="window.location.href='components/reg.html'" disabled>
+                Student Registration
             </button>
 
         </div>
@@ -43,7 +39,7 @@
                 <img class="object-cover object-center rounded mx-1" alt="hero" src="../img/adminLogin.png">
             </div>
             <form class="lg:w-1/2 md:w-1/2 bg-gray-100 border-2 border-blue-500 rounded-lg p-12 my-12 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
-                action="../php-src/_sign-in.php" method="post">
+                action="../_api/_adminLogin.php" method="post">
                 <h2 class="text-gray-900 text-2xl mb-3 font-bold title-font text-center">Admin Login</h2>
                 <div class="relative mb-4">
                     <div class="relative mb-4">
@@ -52,15 +48,15 @@
                             class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
                     <div class="relative">
-                        <label for="email" class="leading-7 text-lg text-gray-600 font-bold">Admin Email</label>
-                        <input type="email" id="email" name="email"
+                        <label for="aemail" class="leading-7 text-lg text-gray-600 font-bold">Admin Email</label>
+                        <input type="email" id="aemail" name="aemail"
                             class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
                 </div>
                 <div class="relative mb-4">
                     <div class="relative">
-                        <label for="name" class="leading-7 text-lg text-gray-600 font-bold">Admin Password</label>
-                        <input type="password" id="pwd" name="pwd"
+                        <label for="apwd" class="leading-7 text-lg text-gray-600 font-bold">Admin Password</label>
+                        <input type="password" id="apwd" name="apwd"
                             class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
                 </div>

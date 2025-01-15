@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['signedIn'])) {
+    header("Location: ../index.html");
+    exit();
+}
+include '../_api/_db.php';
+$uname = $_SESSION['uname'];
+$aID = $_SESSION['aID'];
+
+$chk_sql = "SELECT * FROM `admin` WHERE a_id ='$aID';";
+$res_chk = mysqli_query($con, $chk_sql);
+$row = mysqli_fetch_assoc($res_chk);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +31,7 @@
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../index.html">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="main.php">
                 <img class="bg-none h-16 w-72" src="../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
@@ -24,13 +39,49 @@
                 <a class="mr-5 hover:text-gray-900 font-semibold"></a>
             </nav>
             <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-8 md:mt-0"
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-12 md:mt-0"
                 onclick="window.location.href='admin/projectList.php'">
                 Admin Panel
             </button>
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0 mx-2" href="#">
-                <img class="bg-none h-16 w-16" src="../img/female.png">
-            </a>
+            <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
+
+                <?php
+                if (!isset($_SESSION['signedIn'])) {
+                    echo 'Hi, ' . $uname;
+                } else {
+                    echo 'Admin, ' . $uname;
+                }
+                ?>
+
+            </p>
+            <div class="relative">
+
+                <button id="dropdownButton" class="flex items-center focus:outline-none">
+                    <?php
+                    if (strcmp($row['a_gender'],'M') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/male.png" alt="User Avatar">';
+                    } elseif(strcmp($row['a_gender'],'F') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/female.png" alt="User Avatar">';
+                    }else{
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/gender_none.png" alt="User Avatar">';
+                    }
+                    ?>
+                    
+                </button>
+
+                <div id="dropdownMenu" class="hidden absolute right-0 bg-white border-2 border-green-700 shadow-lg rounded-md w-32 mt-2">
+                    <ul class="text-black font-bold">
+                        <li>
+                            <a href="#" class="block px-4 py-1 hover:bg-green-500">Profile</a>
+                        </li>
+                        <hr class="border-t-2 border-green-800">
+                        <li>
+                            <a href="../_api/_logout.php" class="block px-4 py-1 hover:bg-green-500">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </header>
 
@@ -49,18 +100,14 @@
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Sno</th>
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Item Taken</th>
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Quantity</th>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Date Taken on</th>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Verified By</th>
                                         <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">1</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-red-400 border-0 py-1 px-12 focus:outline-none hover:bg-red-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -70,11 +117,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">2</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-yellow-400 border-0 py-1 px-8 focus:outline-none hover:bg-yellow-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -84,11 +129,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">3</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-green-600 border-0 py-1 px-10 focus:outline-none hover:bg-green-800 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -120,18 +163,14 @@
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Sno</th>
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Item Taken</th>
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Quantity</th>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Date Taken on</th>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Verified By</th>
                                         <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">1</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-red-400 border-0 py-1 px-12 focus:outline-none hover:bg-red-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -141,11 +180,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">2</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-yellow-400 border-0 py-1 px-8 focus:outline-none hover:bg-yellow-500 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -155,11 +192,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="px-4 py-3">Start</td>
-                                        <td class="px-4 py-3">5 Mb/s</td>
-                                        <td class="px-4 py-3">15 GB</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">Free</td>
+                                        <td class="px-4 py-3">3</td>
+                                        <td class="px-4 py-3">Raspberry...</td>
+                                        <td class="px-4 py-3">1</td>
                                         <td class="w-60 text-center">
                                             <button
                                                 class="inline-flex items-center bg-green-600 border-0 py-1 px-10 focus:outline-none hover:bg-green-800 rounded text-sm text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
@@ -244,6 +279,27 @@
         </div>
     </footer>
 
+
+    <script>
+        // JavaScript to toggle dropdown visibility
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        dropdownButton.addEventListener('click', () => {
+            if (dropdownMenu.classList.contains('hidden')) {
+                dropdownMenu.classList.remove('hidden');
+            } else {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -25,13 +25,8 @@
             </nav>
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='login.html'">
-                Login
-            </button>
-            <button
-                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mt-4 mx-2 md:mt-0"
-                onclick="window.location.href='adminLogin.html'">
-                Admin Login
+                onclick="window.location.href='projectList.php'">
+                Home
             </button>
         </div>
     </header>
