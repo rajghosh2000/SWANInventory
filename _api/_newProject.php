@@ -3,21 +3,24 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include '_db.php';
 
-    $aName = $_POST['aname'];
-    $aEmail = $_POST['aemail'];
-    $aGender = $_POST['agender'];
-    $aPwd = $_POST['apwd'];
-    $aID = '';
-    $aCreatedBy = $_SESSION['aID'];
+    $PName = $_POST['pname'];
+    $PCode = $_POST['pcode'];
+    $PFund = $_POST['pfund'];
+    $PDomain = $_POST['pdomain'];
+    $PID = '';
+    $PSdate = $_POST['pstartDate'];
+    $PManage = $_POST['pman'];
 
-    $chk_sql = "SELECT * FROM `admin` WHERE a_email='$aEmail';";
+    $PCreatedBy = $_SESSION['aID'];
+
+    $chk_sql = "SELECT * FROM `projects` WHERE pro_code='$PCode';";
     $res_chk = mysqli_query($con, $chk_sql);
     $row = mysqli_fetch_assoc($res_chk);
 
     if ($res_chk) {
         $numRows = mysqli_num_rows($res_chk);
         if ($numRows == 0) {
-            $chk_sql1 = "SELECT * FROM `admin`";
+            $chk_sql1 = "SELECT * FROM `projects`";
             $res_chk1 = mysqli_query($con, $chk_sql1);
             $row1 = mysqli_fetch_assoc($res_chk1);
 
@@ -25,17 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $numRows_1 = mysqli_num_rows($res_chk1);
                 if($numRows_1 < 10){
                     $tempID = $numRows_1 + 1;
-                    $aID = 'AD00' . $tempID;
+                    $PID = 'PR00' . $tempID;
                 }elseif(($numRows_1 >= 10) and ($numRows_1 < 100)){
                     $tempID = $numRows_1 + 1;
-                    $aID = 'AD0' . $tempID;
+                    $PID = 'PR0' . $tempID;
                 }else{
                     $tempID = $numRows_1 + 1;
-                    $aID = 'AD' . $tempID;
+                    $PID = 'PR' . $tempID;
                 }
 
-                $aPassword = password_hash($aPwd, PASSWORD_DEFAULT);
-                $sql = "INSERT INTO `admin` (`a_id`, `a_name`, `a_email`, `a_pwd`, `a_created_by`, `a_gender`) VALUES ('$aID', '$aName',  '$aEmail', '$aPassword', '$aCreatedBy', '$aGender');";
+                $sql = "INSERT INTO `projects` (`pro_id`, `pro_code`, `pro_name`, `pro_funded_by`, `pro_domain`, `pro_manager`, `a_id`, `pro_startDate`) VALUES ('$PID', '$PCode',  '$PName', '$PFund', '$PDomain', '$PManage', '$PCreatedBy', '$PSdate');";
 
                 $res = mysqli_query($con, $sql);
 
@@ -43,12 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: ../components/admin/projectList.php");
                     exit();
                 }else {
-                    header("Location: ../components/main.php?Err=ServerErr");
+                    header("Location: ../components/admin/projectList.php?Err=ServerErr");
                     exit();
                 }
             }
         }else{
-            header("Location: ../components/main.php?Err=AdminExists");
+            header("Location: ../components/admin/projectList.php?Err=ProjectExists");
             exit();
         }     
     }

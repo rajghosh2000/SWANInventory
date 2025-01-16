@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['signedIn'])) {
+    header("Location: ../../index.html");
+    exit();
+}
+include '../../_api/_db.php';
+$uname = $_SESSION['uname'];
+$aID = $_SESSION['aID'];
+
+$chk_sql = "SELECT * FROM `admin` WHERE a_id ='$aID';";
+$res_chk = mysqli_query($con, $chk_sql);
+$row = mysqli_fetch_assoc($res_chk);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +31,7 @@
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../../index.html">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="projectList.php">
                 <img class="bg-none h-16 w-72" src="../../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
@@ -26,11 +41,49 @@
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
                 onclick="window.location.href='projectList.php'">
-                Home
+                Project Page
             </button>
+
+            <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
+
+                <?php
+                if (!isset($_SESSION['signedIn'])) {
+                    echo 'Hi, ' . $uname;
+                } else {
+                    echo 'Admin, ' . $uname;
+                }
+                ?>
+
+            </p>
+
+            <div class="relative">
+                <button id="dropdownButton" class="flex items-center focus:outline-none">
+                    <?php
+                    if (strcmp($row['a_gender'], 'M') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/male.png" alt="User Avatar">';
+                    } elseif (strcmp($row['a_gender'], 'F') == 0) {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/female.png" alt="User Avatar">';
+                    } else {
+                        echo '<img class="bg-none h-16 w-16 rounded-full" src="../../img/gender_none.png" alt="User Avatar">';
+                    }
+                    ?>
+                </button>
+
+                <div id="dropdownMenu" class="hidden absolute right-0 bg-white border-2 border-green-700 shadow-lg rounded-md w-32 mt-2">
+                    <ul class="text-black font-bold">
+                        <li>
+                            <a href="#" class="block px-4 py-1 hover:bg-green-500">Profile</a>
+                        </li>
+                        <hr class="border-t-2 border-green-800">
+                        <li>
+                            <a href="../../_api/_logout.php" class="block px-4 py-1 hover:bg-green-500">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
-
+    
     <section class="text-gray-600 body-font relative">
         <div class="container px-5 mx-auto flex sm:flex-nowrap md:flex-nowrap flex-wrap">
             <div class="lg:max-w-lg lg:w-full md:w-1/2 m-auto px-4">
@@ -144,30 +197,24 @@
 </body>
 
 <script>
-    const checkPasswordMatch = () => {
-        var upwdInput = document.getElementById("upwd");
-        var cpwdInput = document.getElementById("cpwd");
-        var message = document.getElementById("password-match-message");
-        var submitButton = document.getElementById("reg-sub");
-        var upwdInput = document.getElementById("upwd");
+    // JavaScript to toggle dropdown visibility
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
 
-        var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_])(?=\S+$).{8,}$/;
-
-        if (passwordPattern.test(upwdInput.value)) {
-            if (upwdInput.value === cpwdInput.value) {
-                message.innerHTML = "Passwords match and are Valid !";
-                message.style.color = "green";
-                submitButton.disabled = false;
-            } else {
-                message.innerHTML = "Password is Valid but Passwords do not match !";
-                message.style.color = "red";
-                submitButton.disabled = true;
-            }
+    dropdownButton.addEventListener('click', () => {
+        if (dropdownMenu.classList.contains('hidden')) {
+            dropdownMenu.classList.remove('hidden');
         } else {
-            message.innerHTML = "Password must have at least 8 characters, including at least one special character, one uppercase letter, and one number.";
-            message.style.color = "red";
+            dropdownMenu.classList.add('hidden');
         }
-    };
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
 </script>
 
 </html>

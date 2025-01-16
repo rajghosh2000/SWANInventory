@@ -220,10 +220,10 @@ $row = mysqli_fetch_assoc($res_chk);
                 <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800" onclick="window.location.href='admin/projectList.php'">Admin Panel
                     <i class="fa-solid fa-user-pen text-xl text-white ml-auto px-2"></i>
                 </button>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800">Take New Item
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800" disabled>Take New Item
                     <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
                 </button>
-                <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800">History of Items Taken
+                <button class="flex mt-12 mx-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-800 rounded border-2 border-green-800" disabled>History of Items Taken
                     <i class="fa-solid fa-clock-rotate-left text-2xl text-white ml-auto px-2"></i>
                 </button>
             </div>

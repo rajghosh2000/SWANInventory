@@ -32,7 +32,7 @@ $row = mysqli_fetch_assoc($res_chk);
 <body class="flex flex-col h-screen justify-between overflow-hidden">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../main.php">
+            <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="projectList.php">
                 <img class="bg-none h-16 w-72" src="../../img/logo.png">
             </a>
             <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
@@ -41,8 +41,8 @@ $row = mysqli_fetch_assoc($res_chk);
             </nav>
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='../main.php'">
-                Home
+                onclick="window.location.href='projectList.php'">
+                Project Page
             </button>
 
             <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
@@ -86,105 +86,87 @@ $row = mysqli_fetch_assoc($res_chk);
     </header>
 
     <section class="text-gray-600 body-font overflow-hidden">
-        <div class="container px-5 py-4 mx-auto">
-            <div class="flex flex-col text-center w-full mb-8">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
-                    Projects
-                </h1>
-            </div>
-            <div class="flex flex-wrap my-4 overflow-auto pList">
-                <div class="p-4 md:w-1/4">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/cloud.png" alt="Distributed Component" class="w-12 h-12">
+        <div class="container px-5 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="p-4 w-2/3">
+                    <form class="bg-gray-200 border-2 border-blue-500 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 px-4 rounded-lg relative" action="../../_api/_newProject.php" method="post">
+                        <span class="bg-blue-500 text-white font-bold px-3 py-1 tracking-widest text-sm absolute left-0 top-0 rounded-br">
+                            Add New Project
+                        </span>
+                        <h2 class="text-gray-900 text-2xl mb-3 font-bold title-font text-center">ADD NEW PROJECT</h2>
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 lg:w-1/2">
+                                <div class="relative">
+                                    <label for="pname" class="leading-7 text-lg text-gray-600 font-bold">Project Name</label>
+                                    <input type="text" id="pname" name="pname"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="p-2 lg:w-1/4">
+                                <div class="relative">
+                                    <label for="pcode" class="leading-7 text-lg text-gray-600 font-bold">Project Code</label>
+                                    <input type="text" id="pcode" name="pcode"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="p-2 lg:w-1/4">
+                                <div class="relative">
+                                    <label for="pfund" class="leading-7 text-lg text-gray-600 font-bold">Funding Agency</label>
+                                    <input type="text" id="pfund" name="pfund"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
+
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 lg:w-1/2">
+                                <div class="relative">
+                                    <label for="pdomain" class="leading-7 text-lg text-gray-600 font-bold">Project Broad Working Domain</label>
+                                    <select
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 font-semibold py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="pdomain" name="pdomain" required>
+                                        <option value="iot">IoT</option>
+                                        <option value="networks">Networks</option>
+                                        <option value="cloud">Cloud Computing</option>
+                                        <option value="ai">Artificial Intelligence</option>
+                                        <option value="web-dev">Web Development</option>
+                                        <option value="app-dev">App Development</option>
+                                        <option value="blockchain">Blockchain</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="p-2 lg:w-1/2">
+                                <div class="relative">
+                                    <label for="pstartDate" class="leading-7 text-lg text-gray-600 font-bold">Project Start Date</label>
+                                    <input type="date" id="pstartDate" name="pstartDate"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 lg:w-full">
+                                <div class="relative">
+                                    <label for="pman" class="leading-7 text-lg text-gray-600 font-bold">Project Managed By</label>
+                                    <input type="text" id="pman" name="pman"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 w-full">
+                            <button
+                                class="flex mx-auto text-white bg-blue-600 border-2 border-blue-900 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-xl font-bold mt-12">
+                                Add Project
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="p-4 md:w-1/4">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/ai.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
+                <div class="lg:w-1/3 md:w-1/3 m-auto px-4">
+                    <img class="object-cover object-center rounded mx-1" alt="hero" src="../../img/new-project.png">
                 </div>
-
-                <div class="p-4 md:w-1/4">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/app-dev.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 md:w-1/4">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/iot.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 md:w-1/4">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/networks.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
-                </div>
-
-                <a class="p-4 md:w-1/4" href="#">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/wed-dev.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
-                </a>
-
-                <a class="p-4 md:w-1/4" href="#">
-                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                        <div class="flex items-center mb-3">
-                            <img src="../../img/icons-project/blockchain.png" alt="Distributed Component" class="w-12 h-12">
-                        </div>
-                        <div class="flex-grow">
-                            <h2 class="text-gray-900 text-lg title-font font-medium">Project Code</h2>
-                            <p class="leading-relaxed text-base font-semibold">Funded by: MEITY</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="mx-auto flex flex-wrap flex-col p-2 md:flex-row">
-                <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewProject.php'">Add New Project
-                    <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
-                </button>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewAdmin.php'">Add New Admin
-                    <i class="fa-solid fa-user-tie text-xl text-white ml-auto px-2"></i>
-                </button>
             </div>
         </div>
     </section>
