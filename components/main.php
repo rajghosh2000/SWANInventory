@@ -58,15 +58,15 @@ $row = mysqli_fetch_assoc($res_chk);
 
                 <button id="dropdownButton" class="flex items-center focus:outline-none">
                     <?php
-                    if (strcmp($row['a_gender'],'M') == 0) {
+                    if (strcmp($row['a_gender'], 'M') == 0) {
                         echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/male.png" alt="User Avatar">';
-                    } elseif(strcmp($row['a_gender'],'F') == 0) {
+                    } elseif (strcmp($row['a_gender'], 'F') == 0) {
                         echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/female.png" alt="User Avatar">';
-                    }else{
+                    } else {
                         echo '<img class="bg-none h-16 w-16 rounded-full" src="../img/gender_none.png" alt="User Avatar">';
                     }
                     ?>
-                    
+
                 </button>
 
                 <div id="dropdownMenu" class="hidden absolute right-0 bg-white border-2 border-green-700 shadow-lg rounded-md w-32 mt-2">
@@ -87,6 +87,9 @@ $row = mysqli_fetch_assoc($res_chk);
 
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 mx-auto">
+            <div class="flex flex-col text-center w-full mb-4">
+                <h1 class="sm:text-2xl text-2xl font-bold title-font mb-2 text-gray-900">INVENTORY STATUS</h1>
+            </div>
             <div class="flex flex-wrap -m-4">
                 <div class="p-4 w-1/2">
                     <div class="p-6 rounded-lg border-2 border-blue-500 flex flex-col relative">

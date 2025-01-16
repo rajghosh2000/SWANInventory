@@ -85,53 +85,7 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="text-gray-600 body-font overflow-hidden">
-        <div class="container px-5 py-4 mx-auto">
-            <div class="flex flex-col text-center w-full mb-8">
-                <h1 class="sm:text-2xl text-2xl font-bold title-font mb-2 text-gray-900">SWAN PROJECTS</h1>
-            </div>
-            <div class="flex flex-wrap my-4 overflow-auto pList">
-                <?php
-                $p_sql = "SELECT * FROM `projects`";
-                $p_res = mysqli_query($con, $p_sql);
-                $numRows_p = mysqli_num_rows($p_res);
-
-                if ($numRows_p > 0) {
-                    while ($p_row = mysqli_fetch_assoc($p_res)) {
-
-                        $p_IMG = $p_row['pro_domain'];
-                        $p_CODE = $p_row['pro_code'];
-                        $p_FUND = $p_row['pro_funded_by'];
-                        $p_ID = $p_row['pro_id'];
-
-                        echo ' <a class="p-4 md:w-1/4" href="projectPage.php?prid=' . $p_ID . '">
-                                    <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col border-2 border-blue-600 shadow-lg">
-                                        <div class="flex items-center mb-3">
-                                            <img src="../../img/icons-project/' . $p_IMG . '.png" alt="Distributed Component" class="w-12 h-12">
-                                        </div>   
-                                        <div class="flex-grow">
-                                            <h2 class="text-gray-900 text-lg title-font font-medium">' . $p_CODE . '</h2>
-                                            <p class="leading-relaxed text-base font-semibold">Funded by: ' . $p_FUND . '</p>
-                                        </div>
-                                    </div>
-                                </a>        
-                            ';
-                    }
-                }
-
-                ?>
-            </div>
-            <div class="mx-auto flex flex-wrap flex-col p-2 md:flex-row">
-                <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewProject.php'">Add New Project
-                    <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
-                </button>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewAdmin.php'">Add New Admin
-                    <i class="fa-solid fa-user-tie text-xl text-white ml-auto px-2"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+    
 
     <footer class="text-gray-600 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
