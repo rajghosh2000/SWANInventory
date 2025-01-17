@@ -1,3 +1,24 @@
-.pList{
+.pList {
     max-height: 30rem;
+}
+
+.pPageList {
+    max-height: calc(100vh - 10rem);
+    /* Adjusts based on viewport height */
+    width: 100%;
+    /* Ensures the table takes full width */
+    margin-bottom: 1rem;
+    /* Adds spacing to avoid overlapping footer */
+}
+
+#tableComponent::-webkit-scrollbar {
+    width: 0.40rem;
+}
+
+#tableComponent::-webkit-scrollbar-track {
+    background: rgb(237, 243, 243);
+}
+
+#tableComponent::-webkit-scrollbar-thumb {
+    background: rgb(4, 20, 172);
 }

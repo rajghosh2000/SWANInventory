@@ -30,7 +30,7 @@ $row = mysqli_fetch_assoc($res_chk);
 </head>
 
 <body class="flex flex-col h-screen justify-between overflow-hidden">
-    <header class="text-gray-600 body-font">
+    <header class="text-gray-600 body-font fixed top-0 left-0 w-full z-10 bg-white">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="../main.php">
                 <img class="bg-none h-16 w-72" src="../../img/logo.png">
@@ -85,12 +85,13 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="text-gray-600 body-font overflow-hidden">
+    <section class="flex flex-col h-screen text-gray-600 body-font overflow-y-auto my-24">
         <div class="container px-5 py-4 mx-auto">
             <div class="flex flex-col text-center w-full mb-8">
                 <h1 class="sm:text-2xl text-2xl font-bold title-font mb-2 text-gray-900">SWAN PROJECTS</h1>
             </div>
-            <div class="flex flex-wrap my-4 overflow-auto pList">
+
+            <div class="flex flex-wrap my-4">
                 <?php
                 $p_sql = "SELECT * FROM `projects`";
                 $p_res = mysqli_query($con, $p_sql);
@@ -121,7 +122,8 @@ $row = mysqli_fetch_assoc($res_chk);
 
                 ?>
             </div>
-            <div class="mx-auto flex flex-wrap flex-col p-2 md:flex-row">
+
+            <div class="mx-auto flex flex-grow p-2 md:flex-row">
                 <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
                 <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewProject.php'">Add New Project
                     <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
@@ -133,8 +135,8 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </section>
 
-    <footer class="text-gray-600 body-font">
-        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+    <footer class="text-gray-600 fixed bottom-0 left-0 w-full bg-white">
+        <div class="container px-5 py-2 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0"
                 href="https://cse.iitkgp.ac.in/~smisra/swan/index.html" target="_blank">
                 <img class="bg-none h-10 w-10" src="../../img/SWAN-logo.png">
