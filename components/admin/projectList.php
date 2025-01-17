@@ -85,7 +85,7 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="flex flex-col h-screen text-gray-600 body-font overflow-y-auto my-24">
+    <section class="flex flex-col h-screen text-gray-600 body-font overflow-y-auto my-24 auto-container">
         <div class="container px-5 py-4 mx-auto">
             <div class="flex flex-col text-center w-full mb-8">
                 <h1 class="sm:text-2xl text-2xl font-bold title-font mb-2 text-gray-900">SWAN PROJECTS</h1>
@@ -125,8 +125,11 @@ $row = mysqli_fetch_assoc($res_chk);
 
             <div class="mx-auto flex flex-grow p-2 md:flex-row">
                 <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
-                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewProject.php'">Add New Project
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addItemClass.php'">Add Component Class
                     <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
+                </button>
+                <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewProject.php'">Add New Project
+                    <i class="fa-solid fa-folder-plus text-2xl text-white ml-auto px-2"></i>
                 </button>
                 <button class="flex mx-2 mt-12 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addNewAdmin.php'">Add New Admin
                     <i class="fa-solid fa-user-tie text-xl text-white ml-auto px-2"></i>
@@ -200,6 +203,9 @@ $row = mysqli_fetch_assoc($res_chk);
                 dropdownMenu.classList.add('hidden');
             }
         });
+    </script>
+    <script>
+        document.body.style.zoom = "85%";
     </script>
 </body>
 

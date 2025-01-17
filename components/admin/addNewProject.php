@@ -85,7 +85,7 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="text-gray-600 body-font overflow-hidden">
+    <section class="text-gray-600 body-font overflow-hidden auto-container">
         <div class="container px-5 mx-auto">
             <div class="flex flex-wrap -m-4">
                 <div class="p-4 w-2/3">
@@ -236,6 +236,9 @@ $row = mysqli_fetch_assoc($res_chk);
                 dropdownMenu.classList.add('hidden');
             }
         });
+    </script>
+    <script>
+        document.body.style.zoom = "85%";
     </script>
 </body>
 

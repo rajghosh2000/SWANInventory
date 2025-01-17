@@ -85,7 +85,7 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="flex flex-col h-screen overflow-hidden mx-auto">
+    <section class="flex flex-col h-screen overflow-hidden mx-auto auto-container">
         <div id="viewPageComponent" class="flex justify-end items-center p-4 bg-white border-b">
             <label for="viewPerPage" class="text-gray-700 font-bold mr-2">View per page:</label>
             <select id="viewPerPage" class="border-2 border-blue-700 rounded p-2 text-gray-700 font-bold">
@@ -325,6 +325,9 @@ $row = mysqli_fetch_assoc($res_chk);
         // Initial Render
         renderTable(currentPage, rowsPerPage);
         renderPagination();
+    </script>
+    <script>
+        document.body.style.zoom = "95%";
     </script>
 </body>
 

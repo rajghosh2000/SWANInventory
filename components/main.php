@@ -25,6 +25,7 @@ $row = mysqli_fetch_assoc($res_chk);
     <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
@@ -85,7 +86,7 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="flex flex-col h-screen text-gray-600 body-font overflow-y-auto my-24">
+    <section class="flex flex-col h-screen text-gray-600 body-font overflow-y-auto my-24 auto-container">
         <div class="container px-5 mx-auto">
             <div class="flex flex-col text-center w-full mb-4">
                 <h1 class="sm:text-2xl text-2xl font-bold title-font mb-2 text-gray-900">INVENTORY STATUS</h1>
@@ -302,6 +303,10 @@ $row = mysqli_fetch_assoc($res_chk);
                 dropdownMenu.classList.add('hidden');
             }
         });
+    </script>
+
+    <script>
+        document.body.style.zoom = "85%";
     </script>
 </body>
 

@@ -25,6 +25,7 @@ $row = mysqli_fetch_assoc($res_chk);
     <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="../../css/style.css">
 
 </head>
 
@@ -83,8 +84,8 @@ $row = mysqli_fetch_assoc($res_chk);
             </div>
         </div>
     </header>
-    
-    <section class="text-gray-600 body-font relative">
+
+    <section class="text-gray-600 body-font relative auto-container">
         <div class="container px-5 mx-auto flex sm:flex-nowrap md:flex-nowrap flex-wrap">
             <div class="lg:max-w-lg lg:w-full md:w-1/2 m-auto px-4">
                 <img class="object-cover object-center rounded mx-1" alt="hero" src="../../img/admin-reg.png">
@@ -215,6 +216,9 @@ $row = mysqli_fetch_assoc($res_chk);
             dropdownMenu.classList.add('hidden');
         }
     });
+</script>
+<script>
+    document.body.style.zoom = "85%";
 </script>
 
 </html>

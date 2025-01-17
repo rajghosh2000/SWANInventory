@@ -22,3 +22,8 @@
 #tableComponent::-webkit-scrollbar-thumb {
     background: rgb(4, 20, 172);
 }
+
+.auto-container{
+    transform: scale(0.975); 
+    transform-origin: top left;
+}
