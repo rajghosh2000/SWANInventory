@@ -205,7 +205,7 @@ $row = mysqli_fetch_assoc($res_chk);
         });
     </script>
     <script>
-        document.body.style.zoom = "85%";
+        document.body.style.zoom = "95%";
     </script>
 </body>
 

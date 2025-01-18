@@ -8,9 +8,17 @@ include '../../_api/_db.php';
 $uname = $_SESSION['uname'];
 $aID = $_SESSION['aID'];
 
+$proID = $_GET['prid'];
+
 $chk_sql = "SELECT * FROM `admin` WHERE a_id ='$aID';";
 $res_chk = mysqli_query($con, $chk_sql);
 $row = mysqli_fetch_assoc($res_chk);
+
+$chk_sql2 = "SELECT * FROM `projects` WHERE pro_id ='$proID';";
+$res_chk2 = mysqli_query($con, $chk_sql2);
+$row2 = mysqli_fetch_assoc($res_chk2);
+
+$proNAME = $row2['pro_code'];
 ?>
 
 <!DOCTYPE html>
@@ -41,9 +49,14 @@ $row = mysqli_fetch_assoc($res_chk);
             </nav>
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='projectList.php'">
+                onclick="window.location.href='projectPage.php?prid=<?php echo $proID; ?>'">
                 Project Page
             </button>
+            <button
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                onclick="window.location.href='addItemClass.php'">Add Component Class
+            </button>
+
 
             <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
 
@@ -85,23 +98,132 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="text-gray-600 body-font my-8 auto-container">
+    <section class="text-gray-600 body-font my-4 auto-container">
         <div class="container px-5 mx-auto">
             <div class="flex flex-wrap -m-4">
-                <div class="p-4 w-2/3">
-                    <form class="bg-gray-200 border-2 border-blue-500 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 px-4 rounded-lg relative" action="../../_api/_addCompClass.php" method="post">
+                <div class="p-4 w-full">
+                    <form class="bg-gray-200 border-2 border-blue-500 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 px-4 rounded-lg relative" action="../../_api/_newComp.php?prid=<?php echo $proID; ?>" method="post">
                         <span class="bg-blue-500 text-white font-bold px-3 py-1 tracking-widest text-sm absolute left-0 top-0 rounded-br">
-                            Component Class
+                        <?php echo $proNAME; ?> New Component
                         </span>
-                        <h2 class="text-gray-900 text-2xl m-1 font-bold title-font text-center">ADD NEW COMPONENET CLASS</h2>
-                        <p class="text-sm text-gray-500 font-semibold m-1 text-center">*** For adding Component Class, such as Raspberry Pi and such ***</p>
+                        <h2 class="text-gray-900 text-2xl m-1 font-bold title-font text-center">ADD NEW COMPONENT</h2>
+                        <p class="text-base text-gray-500 font-bold m-1 text-center">*** Add new component here only specific to <?php echo $proNAME; ?> Project ***</p>
                         <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
-                            <div class="p-2 w-full">
+                            <div class="p-2 w-2/3">
                                 <div class="relative">
-                                    <label for="ccname" class="leading-7 text-lg text-gray-600 font-bold">Component Class Name</label>
-                                    <input type="text" id="ccname" name="ccname"
+                                    <label for="cmname" class="leading-7 text-lg text-gray-600 font-bold">Component Name</label>
+                                    <input type="text" id="cmname" name="cmname"
                                         class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm"
                                         required>
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmuid" class="leading-7 text-lg text-gray-600 font-bold">Component Unique ID (** if any **)</label>
+                                    <input type="text" id="cmuid" name="cmuid"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm" placeholder="e.g., ABC091091">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 w-1/4">
+                                <div class="relative">
+                                    <label for="cmclass" class="leading-7 text-lg text-gray-600 font-bold">Component Class</label>
+                                    <select
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 font-semibold py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="cmclass" name="cmclass" required>
+                                        <?php
+                                        $chk_sql1 = "SELECT * FROM `components_class`";
+                                        $res_chk1 = mysqli_query($con, $chk_sql1);
+
+                                        while ($cc_row = mysqli_fetch_assoc($res_chk1)) {
+                                            $ccName = $cc_row['it_c_name'];
+                                            $ccID = $cc_row['it_c_id'];
+
+                                            echo '<option value="' . $ccID . '">' . $ccName . '</option>';
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/4">
+                                <div class="relative">
+                                    <label for="cmqty" class="leading-7 text-lg text-gray-600 font-bold">Component Quantity</label>
+                                    <input type="number" id="cmqty" name="cmqty"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm"
+                                        required placeholder="Default Quantity that arrived">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/4">
+                                <div class="relative">
+                                    <label for="cmunit" class="leading-7 text-lg text-gray-600 font-bold">Component Quantity Unit</label>
+                                    <input type="text" id="cmunit" name="cmunit"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm"
+                                        required placeholder="Unit of the quantity defined">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/4">
+                                <div class="relative">
+                                    <label for="cmcom" class="leading-7 text-lg text-gray-600 font-bold">Consumable/Non Consumable</label>
+                                    <select
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 font-semibold py-2 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        id="cmcom" name="cmcom" required>
+                                        <option value="c">Consumable</option>
+                                        <option value="nc">Non Consumable</option>
+                                        <option value="na">Not Applicable</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmgloc" class="leading-7 text-lg text-gray-600 font-bold">Component Location</label>
+                                    <input type="text" id="cmgloc" name="cmgloc"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm"
+                                        required placeholder="Almirah Number or Name">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmcmpt" class="leading-7 text-lg text-gray-600 font-bold">Component Compartmental Location</label>
+                                    <input type="text" id="cmcmpt" name="cmcmpt"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm" required placeholder="Drawer or Compartment Number Specific">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmaloc" class="leading-7 text-lg text-gray-600 font-bold">Component Altered Location</label>
+                                    <input type="text" id="cmaloc" name="cmaloc"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm" placeholder="If component is placed somewhere">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmmiss" class="leading-7 text-lg text-gray-600 font-bold">Missing Info</label>
+                                    <input type="text" id="cmmiss" name="cmmiss"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm"
+                                        placeholder="If anything is missing from Quantity">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cmsupply" class="leading-7 text-lg text-gray-600 font-bold">Component Supplier</label>
+                                    <input type="text" id="cmsupply" name="cmsupply"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm" required placeholder="e.g., ABC Private Limited">
+                                </div>
+                            </div>
+                            <div class="p-2 w-1/3">
+                                <div class="relative">
+                                    <label for="cminvoice" class="leading-7 text-lg text-gray-600 font-bold">Component Invoice Number</label>
+                                    <input type="text" id="cminvoice" name="cminvoice"
+                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out text-sm" placeholder="If component is placed somewhere">
                                 </div>
                             </div>
                         </div>
@@ -109,37 +231,26 @@ $row = mysqli_fetch_assoc($res_chk);
                         <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-1">
                             <div class="p-2 w-full">
                                 <div class="relative">
-                                    <label for="ccdesc" class="leading-7 text-lg text-gray-600 font-bold">Component Class Description</label>
-                                    <p class="text-sm text-gray-500 font-semibold m-1">*** Short Description of the Component Class, if any***</p>
-                                    <textarea id="ccdesc" name="ccdesc"
+                                    <label for="cmdesc" class="leading-7 text-lg text-gray-600 font-bold">Component Realted Description</label>
+                                    <textarea id="cmdesc" name="cmdesc"
                                         class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                        maxlength="3000"></textarea>
-                                    <p id="wordCount" class="text-sm text-blue-700 font-bold mt-1">Word count: 0/50</p>
+                                        maxlength="2000" placeholder="If any notes relating to the product"></textarea>
+                                    <p id="wordCount" class="text-sm text-blue-700 font-bold mt-1">Word count: 0/20</p>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
-                            <div class="p-2 lg:w-full">
-                                <div class="relative">
-                                    <label for="ccimg" class="leading-7 text-lg text-gray-600 font-bold">Component Class Image</label>
-                                    <input type="file" id="ccimg" name="ccimg" accept="image/*" disabled
-                                        class="w-full bg-white bg-opacity-50 rounded border-2 sm:flex-nowrap border-blue-500 focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 font-semibold py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <p class="text-sm text-gray-500 mt-1 font-semibold">This feature is currently disabled but will be accessible soon.</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="p-2 w-full">
                             <button
                                 class="flex mx-auto text-white bg-blue-600 border-2 border-blue-900 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-xl font-bold">
-                                Add Component Class
+                                Add Component
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="lg:w-1/3 md:w-1/3 m-auto px-4">
-                    <img class="object-cover object-center rounded mx-1" alt="hero" src="../../img/new-component.png">
-                </div>
+                <!-- <div class="lg:w-1/4 md:w-1/4 m-auto px-4">
+                    <img class="object-cover object-center rounded mx-1" alt="hero" src="../../img/new-item.png">
+                </div> -->
             </div>
         </div>
     </section>
@@ -214,15 +325,15 @@ $row = mysqli_fetch_assoc($res_chk);
         document.body.style.zoom = "85%";
     </script>
     <script>
-        const textarea = document.getElementById('ccdesc');
+        const textarea = document.getElementById('cmdesc');
         const wordCountDisplay = document.getElementById('wordCount');
 
         textarea.addEventListener('input', () => {
             const words = textarea.value.split(/\s+/).filter(word => word.length > 0);
-            if (words.length > 50) {
-                textarea.value = words.slice(0, 50).join(' ');
+            if (words.length > 20) {
+                textarea.value = words.slice(0, 20).join(' ');
             }
-            wordCountDisplay.textContent = `Word count: ${words.length}/50`;
+            wordCountDisplay.textContent = `Word count: ${words.length}/20`;
         });
     </script>
 </body>

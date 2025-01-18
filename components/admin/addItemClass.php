@@ -93,7 +93,7 @@ $row = mysqli_fetch_assoc($res_chk);
                         <span class="bg-blue-500 text-white font-bold px-3 py-1 tracking-widest text-sm absolute left-0 top-0 rounded-br">
                             Component Class
                         </span>
-                        <h2 class="text-gray-900 text-2xl m-1 font-bold title-font text-center">ADD NEW COMPONENET CLASS</h2>
+                        <h2 class="text-gray-900 text-2xl m-1 font-bold title-font text-center">ADD NEW COMPONENT CLASS</h2>
                         <p class="text-sm text-gray-500 font-semibold m-1 text-center">*** For adding Component Class, such as Raspberry Pi and such ***</p>
                         <div class="lg:flex lg:flex-wrap md:flex md:flex-wrap m-2">
                             <div class="p-2 w-full">

@@ -8,9 +8,17 @@ include '../../_api/_db.php';
 $uname = $_SESSION['uname'];
 $aID = $_SESSION['aID'];
 
+$proID = $_GET['prid'];
+
 $chk_sql = "SELECT * FROM `admin` WHERE a_id ='$aID';";
 $res_chk = mysqli_query($con, $chk_sql);
 $row = mysqli_fetch_assoc($res_chk);
+
+
+$chk_sql4 = "SELECT * FROM `projects` WHERE pro_id ='$proID';";
+$res_chk4 = mysqli_query($con, $chk_sql4);
+$row4 = mysqli_fetch_assoc($res_chk4);
+$proCode = $row4['pro_code'];
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +37,7 @@ $row = mysqli_fetch_assoc($res_chk);
 
 </head>
 
-<body class="flex flex-col h-screen justify-between overflow-hidden">
+<body class="flex flex-col h-screen justify-between overflow-y-auto">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap flex-col p-4 md:flex-row items-center">
             <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="projectList.php">
@@ -41,8 +49,13 @@ $row = mysqli_fetch_assoc($res_chk);
             </nav>
             <button
                 class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
-                onclick="window.location.href='../main.php'">
+                onclick="window.location.href='projectList.php'">
                 Home
+            </button>
+            <button
+                class="inline-flex items-center bg-blue-600 border-0 py-1 px-3 focus:outline-none hover:bg-blue-900 rounded text-base text-white font-bold border-2 border-blue-900 mx-2 md:mt-0"
+                onclick="window.location.href='newItem.php?prid=<?php echo $proID; ?>'">
+                Add New Item
             </button>
 
             <p class="flex title-font font-medium items-center text-gray-900 md:mb-0 ml-4 mr-2" href="#">
@@ -85,7 +98,8 @@ $row = mysqli_fetch_assoc($res_chk);
         </div>
     </header>
 
-    <section class="flex flex-col h-screen overflow-hidden mx-auto auto-container">
+    <section class="flex flex-col h-screen overflow-hidden mx-auto px-4">
+        <h2 class="text-gray-900 text-2xl m-1 font-bold title-font text-center"><?php echo $proCode; ?> PROJECT COMPONENTS</h2>
         <div id="viewPageComponent" class="flex justify-end items-center p-4 bg-white border-b">
             <label for="viewPerPage" class="text-gray-700 font-bold mr-2">View per page:</label>
             <select id="viewPerPage" class="border-2 border-blue-700 rounded p-2 text-gray-700 font-bold">
@@ -101,20 +115,75 @@ $row = mysqli_fetch_assoc($res_chk);
                 <table class="min-w-full table-auto border-collapse shadow-md">
                     <thead class="bg-blue-600 text-white sticky top-0 z-10">
                         <tr>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 1</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 2</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 3</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 4</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 5</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 6</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 7</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 8</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 9</th>
-                            <th class="border-2 border-blue-700 px-4 py-2">Column 10</th>
+                            <th class="border-2 border-blue-700 px-1 py-2">Sno.</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Component Name</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Compnent Unique ID</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Component Class</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Qty</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Qty Unit</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Location</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Compartment</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Altered Location</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Anything Missing</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Supplier</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Invoice No.</th>
+                            <th class="border-2 border-blue-700 px-4 py-2">Verified By</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="bg-white">
-                        <!-- Rows will be dynamically inserted here -->
+                        <?php
+                        $chk_sql1 = "SELECT * FROM `components`";
+                        $res_chk1 = mysqli_query($con, $chk_sql1);
+
+                        $cm_count = 0;
+
+                        while ($cm_row = mysqli_fetch_assoc($res_chk1)) {
+                            $cmname = $cm_row['cmpt_name'];
+                            $cmuid = $cm_row['cmpt_unique_id'];
+                            $cmclass = $cm_row['cmpt_class']; //need name
+                            $cmqty = $cm_row['cmp_qty'];
+                            $cmunit = $cm_row['cmp_unit'];
+                            $cmcom = $cm_row['cmpt_consumable'];
+                            $cmgloc = $cm_row['cmpt_global_location'];
+                            $cmcmpt = $cm_row['cmpt_location_compartment'];
+                            $cmaloc = $cm_row['cmpt_altered_loc'];
+                            $cmmiss = $cm_row['cmpt_missing'];
+                            $cmsupply = $cm_row['cmpt_supplier'];
+                            $cminvoice = $cm_row['cmpt_invoice_no'];
+                            $cmadmin = $cm_row['cmpt_added_by']; //need name
+
+                            $chk_sql2 = "SELECT `it_c_name` FROM `components_class` WHERE it_c_id ='$cmclass'";
+                            $res_chk2 = mysqli_query($con, $chk_sql2);
+                            $cmc_row = mysqli_fetch_assoc($res_chk2);
+                            $cmclassName = $cmc_row['it_c_name'];
+
+                            $chk_sql3 = "SELECT `a_name` FROM `admin` WHERE a_id ='$cmadmin'";
+                            $res_chk3 = mysqli_query($con, $chk_sql3);
+                            $cma_row = mysqli_fetch_assoc($res_chk3);
+                            $cmAdmin = $cma_row['a_name'];
+
+
+                            $cm_count = $cm_count + 1;
+
+                            echo '
+                                <tr>
+                                    <td class="border border-gray-300 px-1 py-2 text-center">' . $cm_count . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmname . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . (strcmp($cmuid, '') ? $cmuid : '----') . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmclassName . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmqty . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmunit . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmgloc . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmcmpt . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . (strcmp($cmaloc, '') ? $cmaloc : '----') . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . (strcmp($cmmiss, '') ? $cmmiss : '----') . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmsupply . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cminvoice . '</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center">' . $cmAdmin . '</td>
+                                </tr>
+                            ';
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -124,6 +193,16 @@ $row = mysqli_fetch_assoc($res_chk);
             <button id="prevPage" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 border-2 border-blue-800 font-bold">Previous</button>
             <div id="pageNumbers" class="flex space-x-2"></div>
             <button id="nextPage" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 border-2 border-blue-800 font-bold">Next</button>
+        </div>
+
+        <div class="flex flex-wrap p-2 md:flex-row">
+            <div class="md:ml-auto flex flex-wrap items-center text-base justify-center"></div>
+            <button class="flex mx-2 mt-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='addItemClass.php'">Add Component Class
+                <i class="fa-regular fa-square-plus text-2xl text-white ml-auto px-2"></i>
+            </button>
+            <button class="flex mx-2 mt-2 text-white font-bold bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-green-800 rounded border-2 border-green-800" onclick="window.location.href='newItem.php?prid=<?php echo $proID; ?>'">Add New Item
+                <i class="fa-solid fa-circle-plus text-2xl text-white ml-auto px-2"></i>
+            </button>
         </div>
     </section>
 
@@ -196,22 +275,6 @@ $row = mysqli_fetch_assoc($res_chk);
         });
     </script>
     <script>
-        // Sample Data
-        const tableData = Array.from({
-            length: 200
-        }, (_, i) => [
-            `Row ${i + 1} Col 1`,
-            `Row ${i + 1} Col 2`,
-            `Row ${i + 1} Col 3`,
-            `Row ${i + 1} Col 4`,
-            `Row ${i + 1} Col 5`,
-            `Row ${i + 1} Col 6`,
-            `Row ${i + 1} Col 7`,
-            `Row ${i + 1} Col 8`,
-            `Row ${i + 1} Col 9`,
-            `Row ${i + 1} Col 10`
-        ]);
-
         // DOM Elements
         const tableBody = document.getElementById('tableBody');
         const viewPerPage = document.getElementById('viewPerPage');
@@ -223,25 +286,6 @@ $row = mysqli_fetch_assoc($res_chk);
         let currentPage = 1;
         let rowsPerPage = parseInt(viewPerPage.value);
         const maxVisiblePages = 5; // Maximum number of page buttons to show at once
-
-        // Render Table
-        function renderTable(page, rowsPerPage) {
-            tableBody.innerHTML = '';
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-
-            const rowsToRender = tableData.slice(start, end);
-            rowsToRender.forEach(row => {
-                const rowElement = document.createElement('tr');
-                row.forEach(cell => {
-                    const cellElement = document.createElement('td');
-                    cellElement.textContent = cell;
-                    cellElement.className = 'border border-gray-300 px-4 py-2 text-center';
-                    rowElement.appendChild(cellElement);
-                });
-                tableBody.appendChild(rowElement);
-            });
-        }
 
         // Render Pagination
         function renderPagination() {
@@ -325,9 +369,6 @@ $row = mysqli_fetch_assoc($res_chk);
         // Initial Render
         renderTable(currentPage, rowsPerPage);
         renderPagination();
-    </script>
-    <script>
-        document.body.style.zoom = "95%";
     </script>
 </body>
 
