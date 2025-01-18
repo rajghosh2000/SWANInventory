@@ -1,5 +1,5 @@
 <div align="center" class="row" style="border-radius: 25px;">
-  <img " src="img/logo.png" width="200"/>
+  <img " src="img/logo.png" width="400"/>
 </div>
 <h1 align="center">SWAN INVENTORY MANAGEMENT SYSTEM</h1>
 <h3 align="center">SWAN LAB, IIT KHARAGPUR</h3>
